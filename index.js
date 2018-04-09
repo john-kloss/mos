@@ -1,3 +1,4 @@
+"use strict";
 const mqtt = require("mqtt");
 const client = mqtt.connect("mqtt://broker.mqtt-dashboard.com");
 
@@ -51,5 +52,17 @@ client.on("message", (topic, message) => {
       client.publish("/device/status", 1);
       console.log("sunny");
     }
+  }
+
+
+});
+var sys = require("sys");
+var exec = require("child_process").exec;
+var child;
+child = exec("sshpass -p 'ZH3d3IpK' ssh pi@192.168.23.120 'python led.py'", function(error, stdout, stderr) {
+  console.log("stdout: " + stdout);
+  console.log("stderr: " + stderr);
+  if (error !== null) {
+    console.log("exec error: " + error);
   }
 });
