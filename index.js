@@ -1,5 +1,4 @@
 const mqtt = require("mqtt");
-const moment = require("moment");
 const client = mqtt.connect("mqtt://broker.mqtt-dashboard.com");
 
 client.on("connect", () => {
@@ -49,7 +48,7 @@ client.on("message", (topic, message) => {
     if (energy < 7000) {
       console.log("cloudy");
     } else {
-      client.publish("/device/status", "1");
+      client.publish("/device/status", 1);
       console.log("sunny");
     }
   }
