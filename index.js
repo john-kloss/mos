@@ -1,10 +1,10 @@
 const mqtt = require("mqtt");
+const moment = require("moment");
 const client = mqtt.connect("mqtt://broker.mqtt-dashboard.com");
 
 client.on("connect", () => {
   client.subscribe("weather");
   client.subscribe("/energy/income");
-  //client.publish("/central/prediction", "true");
 });
 
 /**
@@ -45,11 +45,23 @@ client.on("message", (topic, message) => {
    */
   if (topic === "/energy/income") {
     const energy = JSON.parse(message);
-    if (energy < 7000) {
-      console.log("cloudy");
+    const hour = moment().format("HH");
+
+    if (energy < 5000) {
+      console.log("dark");
+      client.publish("/device/status", "0");
+
+      // if the weather is still bad we start anyways
+      // if (hour > 14) {
+      //   client.publish("/device/status", "1");
+      //   console.log("starting");
+      // }
+    } else if (energy < 9000) {
+      client.publish("/device/status", "1");
+      console.log("overcast");
     } else {
-      client.publish("/device/status", 1);
       console.log("sunny");
+      client.publish("/device/status", "2");
     }
   }
 });
