@@ -5,7 +5,6 @@ const request = require("request");
 const client = mqtt.connect("mqtt://broker.mqtt-dashboard.com");
 var sys = require("sys");
 var exec = require("child_process").exec;
-//var sleep = require('sleep'); 
 
 
 let ready = {
@@ -151,7 +150,6 @@ client.on("message", (topic, message) => {
           //client.publish("/device/status", "2");
           client.publish("/device/dishwasher/status", "1");
           client.publish("/device/washingmachine/status", "1");
-          //sleep.sleep(5);
           console.log("Dishwasher and Washingmachine done");
           client.publish("/device/dishwasher/feedback", "0");
           client.publish("/device/washingmachine/feedback", "0");
@@ -172,7 +170,6 @@ client.on("message", (topic, message) => {
           }
           //client.publish("/device/status", "1");
           client.publish("/device/dishwasher/status", "1");
-          //sleep.sleep(5);
           ready.dishwasher = false;
           console.log("Dishwasher done");
           client.publish("/device/dishwasher/feedback", "0");
@@ -191,7 +188,6 @@ client.on("message", (topic, message) => {
         }
         //client.publish("/device/status", "3");
         client.publish("/device/washingmachine/status", "1");
-        //sleep.sleep(5);
         ready.washingmachine = false;
         console.log("Washingmachine done");
         client.publish("/device/washingmachine/feedback", "0");
