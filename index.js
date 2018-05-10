@@ -143,7 +143,7 @@ client.on("message", (topic, message) => {
     ) {
       var child;
       child = exec(
-        "sshpass -p 'ZH3d3IpK' ssh pi@192.168.23.120 'python dishwasher.py & python washingmachine.py'",
+        "sshpass -p 'PASSWORD' ssh pi@192.168.23.120 'python dishwasher.py & python washingmachine.py'",
         function(error, stdout, stderr) {
           if (error !== null) {
             console.log("exec error: " + error);
@@ -165,7 +165,7 @@ client.on("message", (topic, message) => {
       if(ready.dishwasher === true){
         var child;
         child = exec(
-        "sshpass -p 'ZH3d3IpK' ssh pi@192.168.23.120 'python dishwasher.py'",
+        "sshpass -p 'PASSWORD' ssh pi@192.168.23.120 'python dishwasher.py'",
         function(error, stdout, stderr) {
           if (error !== null) {
             console.log("exec error: " + error);
@@ -184,7 +184,7 @@ client.on("message", (topic, message) => {
       else if (ready.washingmachine === true){
       var child;
       child = exec(
-      "sshpass -p 'ZH3d3IpK' ssh pi@192.168.23.120 'python washingmachine.py'",
+      "sshpass -p 'PASSWORD' ssh pi@192.168.23.120 'python washingmachine.py'",
       function(error, stdout, stderr) {
         if (error !== null) {
           console.log("exec error: " + error);
